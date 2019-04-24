@@ -7,6 +7,8 @@
 #include <queue>
 #include <string>
 #include <fstream>
+#include <istream>
+#include <sstream>
 
 using namespace std;
 
@@ -17,8 +19,6 @@ int main (int argc, char* argv[])
 	string filename;
 	int do_stdin = 0;
 	int shift = 0;
-	int end_of_file = 0;
-	int overflow_check = 0;
 	string argv_one;
 	if(argc > 1) argv_one = argv[1];
 	
@@ -54,37 +54,61 @@ int main (int argc, char* argv[])
 	
 	cout << "row_count: " << row_count << endl << "row_shift: " << row_shift << endl << "filename: " << filename << endl;
 	
-	/*
-	FILE* f;
-	if(do_stdin == 0) {
-		f = fopen (filename, "r");
-		if(f == NULL) {
+	queue<string> lines;
+	string help_string;
+	
+	if(do_stdin == 1) {
+		if(shift == 0) {
+			while(1) {
+				if(cin.eof()) break;
+				getline(cin, help_string);
+				cin >> help_string;
+				if(help_string.empty() == 0) lines.push(help_string);
+				if(lines.size() > row_count) lines.pop();
+			}
+			while(lines.size() > 0) {
+				cout << lines.front() << endl;
+				lines.pop();
+			}
+		}
+		else {
+			for(unsigned i = 0; cin.eof() == 0; i++) {
+					cin >> help_string;
+					if(i + 2 > row_shift) cout << help_string << endl;
+			}
+		}
+	}
+	else {
+		ifstream file;
+		file.open(filename, ios::in);
+		if(file.is_open() == 0) {
 			cerr << "tail: file could not be opened or wrong format of arguments" << endl;
 			exit(1);
 		}
-	}
-
-	if(shift == 0) { // -n no + or no -n at all
-		//
-		Line* current_line = create_lines(row_count);
-		while(end_of_file == 0) {
-			if (do_stdin != 0) end_of_file = load_stdin_line(current_line, &overflow_check);
-			else end_of_file = load_file_line(current_line, f, &overflow_check);
-			if(end_of_file != 2) current_line = current_line->next;
+		
+		if(shift == 0) {
+			while(1) {
+				if(file.eof()) break;
+				getline(file,help_string);
+				if(help_string.empty() == 0) lines.push(help_string);
+				if(lines.size() > row_count) lines.pop();
+			}
+			while(lines.size() > 0) {
+				cout << lines.front() << endl;
+				lines.pop();
+			}
 		}
-		write_lines(current_line, row_count);
-		destroy_all_lines(current_line);
-	}
-	else {
-		Line* current_line = create_line();
-		for(unsigned int i = 1; end_of_file == 0; i++) {
-			if (do_stdin != 0) end_of_file = load_stdin_line(current_line, &overflow_check);
-			else end_of_file = load_file_line(current_line, f, &overflow_check);
-			if(i >= row_shift && end_of_file != 2) printf("%s", current_line->content);
+		else {
+			for(unsigned i = 0; file.eof() == 0; i++) {
+					file >> help_string;
+					if(i + 2 > row_shift) cout << help_string << endl;
+			}
 		}
-		free(current_line);
+		
+		file.close();
 	}
 	
-	if(do_stdin == 0) fclose(f);*/
+	
+	
 	return 0;
 }
