@@ -9,6 +9,7 @@ htab_t *htab_move(size_t n, htab_t *from)
 {
 	htab_t *table;
 	table = htab_init(n);
+	if(table == NULL) return NULL;
 	int value;
 	char* key;
 	
