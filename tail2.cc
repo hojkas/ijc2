@@ -71,7 +71,7 @@ int main (int argc, char* argv[])
 		}
 		else {
 			for(unsigned i = 0; cin.eof() == 0; i++) {
-					cin >> help_string;
+					getline(cin, help_string);
 					if(i + 2 > row_shift) cout << help_string << endl;
 			}
 		}
@@ -98,7 +98,7 @@ int main (int argc, char* argv[])
 		}
 		else {
 			for(unsigned i = 0; file.eof() == 0; i++) {
-					file >> help_string;
+					getline(file,help_string);
 					if(i + 2 > row_shift) cout << help_string << endl;
 			}
 		}
