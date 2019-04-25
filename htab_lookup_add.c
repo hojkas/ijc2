@@ -3,7 +3,7 @@
 // Autor: Iveta Strnadová (xstrna14), FIT
 // Přeloženo: gcc 7.3.0
 
-#include "htab.h"
+#include "htabp.h"
 #include <stdio.h>
 
 struct htab_item* create_item(const char* key)

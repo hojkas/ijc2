@@ -52,8 +52,6 @@ int main (int argc, char* argv[])
 		else if (argc == 1) do_stdin = 1;
 	} //hotové parsování argumentů
 	
-	cout << "row_count: " << row_count << endl << "row_shift: " << row_shift << endl << "filename: " << filename << endl;
-	
 	queue<string> lines;
 	string help_string;
 	

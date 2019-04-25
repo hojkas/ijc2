@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "htab.h"
+#include "htabp.h"
 #include "io.h"
 
-#define MAX_LENGHT 5
-#define TAB_SIZE 2
+#define MAX_LENGHT 1024
+#define TAB_SIZE 50
 
 int main()
 {	
@@ -46,7 +46,7 @@ int main()
 	//going through hash table content and printing the words with count
 	htab_iterator_t curr = htab_begin(table);
 	while(curr.ptr != NULL) {
-		printf("%s - %d\n", curr.ptr->key, curr.ptr->data);
+		printf("%s          %d\n", curr.ptr->key, curr.ptr->data);
 		curr = htab_iterator_next(curr);
 	}
 	

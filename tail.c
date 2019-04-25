@@ -15,6 +15,7 @@ struct line_t {
 	Line *next;
 };
 
+//Vytváří jednu strukturu line
 Line *create_line()
 {
 	Line *line = malloc(sizeof(struct line_t));
@@ -25,11 +26,13 @@ Line *create_line()
 	return line;
 }
 
+//Naváže line_to_place na current_line
 void add_line(Line *current_line, Line *line_to_place)
 {
 	current_line->next = line_to_place;
 }
 
+//Uvolní lines
 void destroy_all_lines(Line *line)
 {
 	Line* end_line = line;
@@ -42,6 +45,7 @@ void destroy_all_lines(Line *line)
 	free(line);
 }
 
+//Vytvoří n lines lineárně provázaných
 Line *create_lines(unsigned number)
 {
 	Line* first_line = create_line();
@@ -60,6 +64,7 @@ Line *create_lines(unsigned number)
 	return first_line;
 }
 
+//načte zbytek řádku ze stdin, co už se nevejde do LINE_LENGHT
 int flush_stdin_line()
 {
 	int loaded;
@@ -70,6 +75,7 @@ int flush_stdin_line()
 	}
 }
 
+//načte zbytek řádku z file, co už se nevejde do LINE_LENGHT
 int flush_file_line(FILE* file)
 {
 	int loaded;
@@ -80,6 +86,9 @@ int flush_file_line(FILE* file)
 	}
 }
 
+/*
+* Načte line ze stdin (zbytečně oddělené od load_file_line, lze sloučit)
+*/
 int load_stdin_line(Line* line, int* overflow_check)
 {
 	int loaded;
@@ -108,6 +117,9 @@ int load_stdin_line(Line* line, int* overflow_check)
 	return found_eof;
 }
 
+/*
+* načte line ze souboru
+*/
 int load_file_line(Line* line, FILE* file, int* overflow_check)
 {
 	int loaded;
@@ -136,7 +148,9 @@ int load_file_line(Line* line, FILE* file, int* overflow_check)
 	return found_eof;
 }
 
-
+/*
+* Funkce vypíše všechny provázané lines
+*/
 void write_lines(Line* start_line, unsigned number)
 {
 	Line* to_write = start_line;
@@ -156,6 +170,7 @@ int main(int argc, char* argv[])
 	int end_of_file = 0;
 	int overflow_check = 0;
 	
+	//začátek parsování argumentů
 	if(argc > 2 && (strcmp(argv[1], "-n") == 0)) {
 		if(argv[2][0] == '+') {
 			row_shift = strtol(&argv[2][1], &argv[2], 10);
@@ -197,7 +212,7 @@ int main(int argc, char* argv[])
 
 	if(shift == 0) { // -n no + or no -n at all
 		Line* current_line = create_lines(row_count);
-		while(end_of_file == 0) {
+		while(end_of_file == 0) { //načítá lines ze souboru do kruhu lines, nové přepisují ty staré
 			if (do_stdin != 0) end_of_file = load_stdin_line(current_line, &overflow_check);
 			else end_of_file = load_file_line(current_line, f, &overflow_check);
 			if(end_of_file != 2) current_line = current_line->next;
@@ -207,7 +222,7 @@ int main(int argc, char* argv[])
 	}
 	else {
 		Line* current_line = create_line();
-		for(unsigned int i = 1; end_of_file == 0; i++) {
+		for(unsigned int i = 1; end_of_file == 0; i++) { //nacte jedinou line, je-li i vetsi nez shift, vypise ji
 			if (do_stdin != 0) end_of_file = load_stdin_line(current_line, &overflow_check);
 			else end_of_file = load_file_line(current_line, f, &overflow_check);
 			if(i >= row_shift && end_of_file != 2) printf("%s", current_line->content);

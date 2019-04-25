@@ -2,7 +2,7 @@
 // soucast IJC-DU2, příklad b)
 // Přeloženo: gcc 7.3.0
 
-#include "htab.h"
+#include "htabp.h"
 #include <stdint.h>
 
 unsigned int htab_hash_function(const char *str) {

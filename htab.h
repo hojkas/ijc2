@@ -15,20 +15,6 @@ struct htab;    // neúplná deklarace struktury - uživatel nevidí obsah
 // iterátor do tabulky:
 struct htab_item;               // neúplná deklarace struktury
 
-//TODO remove from here, just temp
-typedef struct {
-	size_t size;
-	size_t arr_size;
-	struct htab_item** htab_bucket;
-} htab_t;
-
-//TODO also remove and to it opaque
-struct htab_item {
-	char* key;
-	int data;
-	struct htab_item* next;
-};
-
 // iterátor:
 typedef struct htab_iterator {
     struct htab_item *ptr;      // ukazatel na položku

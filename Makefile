@@ -10,10 +10,7 @@ CFLAGS = -std=c99 -Wall -Wextra -pedantic
 
 CPPFLAGS = -std=c++11 -pedantic -Wall
 
-all: tail wordcount tail2 wc-
-quick: tail2
-	./tail2
-	rm tail2
+all: tail wordcount tail2 wordcount-
 
 tail: tail.o
 	$(CC) $(CFLAGS) tail.o -o tail
@@ -73,6 +70,4 @@ htab_begin.o:
 	
 #cleaning
 clean:
-	rm tail wordcount wc-
-massclean:
-	rm tail wordcount wc- *.o libhtable.a
+	rm tail tail2 wordcount wordcount- *.o libhtable.a
