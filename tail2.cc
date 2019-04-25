@@ -14,6 +14,7 @@ using namespace std;
 
 int main (int argc, char* argv[])
 {
+	ios::sync_with_stdio(false);
 	unsigned int row_count = 10;
 	unsigned int row_shift = 0;
 	string filename;
