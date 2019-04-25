@@ -5,7 +5,7 @@
 SHELL = /bin/bash
 
 CC = gcc
-LIBFILE = htab_size.o htab_move.o htab_lookup_add.o htab_iterator_set_value.o htab_iterator_get_value.o htab_iterator_get_key.o htab_iterator_next.o htab_init.o htab_hash_function.o htab_free.o htab_end.o htab_clear.o htab_bucket_count.o htab_begin.o htab.h htab.o
+LIBFILE = htab_size.o htab_move.o htab_lookup_add.o htab_iterator_set_value.o htab_iterator_get_value.o htab_iterator_get_key.o htab_iterator_next.o htab_init.o htab_hash_function.o htab_free.o htab_end.o htab_clear.o htab_bucket_count.o htab_begin.o htab.h htabp.h
 CFLAGS = -std=c99 -Wall -Wextra -pedantic
 
 CPPFLAGS = -std=c++11 -pedantic -Wall
@@ -70,8 +70,6 @@ htab_bucket_count.o:
 	$(CC) -c htab_bucket_count.c -o htab_bucket_count.o
 htab_begin.o:
 	$(CC) -c htab_begin.c -o htab_begin.o
-htab.o:
-	$(CC) -c htab.c -o htab.o
 	
 #cleaning
 clean:

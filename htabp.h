@@ -1,14 +1,15 @@
 #include "htab.h"
-/*
-struct {
-	int size;
-	int arr_size;
-	struct htab_item_t** htab_bucket;
+
+//TODO remove from here, just temp
+typedef struct {
+	size_t size;
+	size_t arr_size;
+	struct htab_item** htab_bucket;
 } htab_t;
 
-typedef struct {
-	char** key;
+//TODO also remove and to it opaque
+struct htab_item {
+	char* key;
 	int data;
-	struct htab_item_t* next;
-} htab_item_t;
-*/
+	struct htab_item* next;
+};

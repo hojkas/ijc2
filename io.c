@@ -39,7 +39,7 @@ int get_word(char *s, int max, FILE *f)
 	else if(found_end == 0) {
 		flush_file_line(f);
 		s[i] = '\0';
-		return i;
+		return i+1;
 	}
 	else return i-1;
 }
