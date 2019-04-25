@@ -60,7 +60,6 @@ int main (int argc, char* argv[])
 			while(1) {
 				if(cin.eof()) break;
 				getline(cin, help_string);
-				cin >> help_string;
 				if(help_string.empty() == 0) lines.push(help_string);
 				if(lines.size() > row_count) lines.pop();
 			}

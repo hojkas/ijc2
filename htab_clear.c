@@ -1,5 +1,5 @@
 // htab_clear.c
-// Řešení IJC-DU2, příklad b)
+// Řešení IJC-DU2, příklad b), 22.4.2019
 // Autor: Iveta Strnadová (xstrna14), FIT
 // Přeloženo: gcc 7.3.0
 
